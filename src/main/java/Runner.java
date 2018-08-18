@@ -1,9 +1,8 @@
+import db.DBDancer;
 import db.DBHelper;
-import models.Choreographer;
-import models.DanceShow;
-import models.Dancers.Dancer;
-import models.Director;
-import models.Venue;
+import db.DBPT;
+import models.*;
+import models.Dancer;
 
 import java.util.List;
 
@@ -21,6 +20,8 @@ public class Runner {
         DanceShow danceShow2;
         Venue venue1;
         Venue venue2;
+        PT physio1;
+        PT physio2;
 
 //        CRUD FOR DANCER
         ballerina = new Dancer("Anna","Mona", 6, "Ballet" );
@@ -73,5 +74,13 @@ public class Runner {
         DBHelper.save(venue1);
         DBHelper.save(venue2);
 
+//      CRUD FOR PT + LOOK FOR DANCER
+        physio1 = new PT("James", ballerina);
+        DBHelper.save(physio1);
+        physio2 = new PT ("Anna", contemporaryDancer);
+        DBHelper.save(physio2);
+
+//        TODO: Get dancer for physio
+        PT getPTofDancer = DBDancer.getPTForDancer(ballerina);
     }
 }

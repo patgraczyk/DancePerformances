@@ -1,4 +1,6 @@
-package models.Dancers;
+package models;
+
+import models.PT;
 
 import javax.persistence.*;
 
@@ -12,13 +14,14 @@ public class Dancer {
     private String stageName;
     private int shoeSize;
     private String danceStyle;
-
+    private PT pt;
 
     public Dancer(String name, String stageName, int shoeSize, String danceStyle) {
         this.name = name;
         this.stageName = stageName;
         this.shoeSize = shoeSize;
         this.danceStyle = danceStyle;
+        this.pt = pt;
     }
 
     public Dancer() {
@@ -70,5 +73,14 @@ public class Dancer {
 
     public void setDanceStyle(String danceStyle) {
         this.danceStyle = danceStyle;
+    }
+
+    @OneToOne(mappedBy = "dancer", fetch = FetchType.LAZY)
+    public PT getPt() {
+        return pt;
+    }
+
+    public void setPt(PT pt) {
+        this.pt = pt;
     }
 }
