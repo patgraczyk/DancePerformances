@@ -1,5 +1,6 @@
 package models;
 
+import models.Dancers.Dancer;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;

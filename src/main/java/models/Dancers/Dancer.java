@@ -1,5 +1,7 @@
-package models;
+package models.Dancers;
 
+import models.Choreographer;
+import models.DanceShow;
 import models.PT;
 import org.hibernate.annotations.Cascade;
 
@@ -9,8 +11,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "dancers")
-
-public class Dancer {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Dancer {
 
     private int id;
     private String name;

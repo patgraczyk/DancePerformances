@@ -1,5 +1,7 @@
 package models;
 
+import models.Dancers.Dancer;
+
 import javax.persistence.*;
 
 

@@ -2,7 +2,7 @@ package db;
 
 import models.Choreographer;
 import models.DanceShow;
-import models.Dancer;
+import models.Dancers.Dancer;
 import models.PT;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;

@@ -1,8 +1,7 @@
 package db;
 
 import models.Choreographer;
-import models.Dancer;
-import models.PT;
+import models.Dancers.Dancer;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
