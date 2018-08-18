@@ -1,8 +1,11 @@
 package models;
 
 import models.PT;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "dancers")
@@ -16,6 +19,7 @@ public class Dancer {
     private String danceStyle;
     private PT pt;
     private Choreographer choreographer;
+    private List<DanceShow> danceShows;
 
     public Dancer(String name, String stageName, int shoeSize, String danceStyle, Choreographer choreographer) {
         this.name = name;
@@ -24,6 +28,7 @@ public class Dancer {
         this.danceStyle = danceStyle;
         this.pt = pt;
         this.choreographer = choreographer;
+        this.danceShows = new ArrayList<DanceShow>();
     }
 
     public Dancer() {
@@ -94,5 +99,24 @@ public class Dancer {
 
     public void setChoreographer(Choreographer choreographer) {
         this.choreographer = choreographer;
+    }
+
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @ManyToMany
+    @JoinTable(
+            name = "dancers_shows",
+            joinColumns = {@JoinColumn(name = "dancer_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "dance_show_id", nullable = false, updatable = false)}
+    )
+    public List<DanceShow> getDanceShows() {
+        return danceShows;
+    }
+
+    public void setDanceShows(List<DanceShow> danceShows) {
+        this.danceShows = danceShows;
+    }
+
+    public void addDanceShow(DanceShow danceShow){
+        this.danceShows.add(danceShow);
     }
 }

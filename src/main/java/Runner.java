@@ -93,5 +93,11 @@ public class Runner {
         List<DanceShow> danceShowOfDirector2 = DBDirector.getDanceShowsOfDirector(director2);
 //        Director director = DBDanceShow.getDirectorOfShow(danceShow1);
 
+        DBDancer.addDancerToDanceShow(ballerina, danceShow1);
+        DBDancer.addDancerToDanceShow(contemporaryDancer, danceShow2);
+
+        List<DanceShow> dancers = DBDancer.getListOfDanceShowsforDancer(ballerina);
+        List<Dancer> cast = DBDanceShow.getCastOfTheShow(danceShow1);
+
     }
 }
