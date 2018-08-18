@@ -1,6 +1,6 @@
+import db.DBChoreographer;
 import db.DBDancer;
 import db.DBHelper;
-import db.DBPT;
 import models.*;
 import models.Dancer;
 
@@ -23,14 +23,21 @@ public class Runner {
         PT physio1;
         PT physio2;
 
+//        CRUD FOR CHOREOGRAPHER
+        choreographer1 = new Choreographer("Malvin", "Famous Strike");
+        choreographer2 = new Choreographer("Jasmin", "Great Dances");
+
+        DBHelper.save(choreographer1);
+        DBHelper.save(choreographer2);
+
 //        CRUD FOR DANCER
-        ballerina = new Dancer("Anna","Mona", 6, "Ballet" );
+        ballerina = new Dancer("Anna","Mona", 6, "Ballet" , choreographer1);
         DBHelper.save(ballerina);
 
-        contemporaryDancer = new Dancer("Digory", "Moomin", 8, "contemporary");
+        contemporaryDancer = new Dancer("Digory", "Moomin", 8, "contemporary", choreographer1);
         DBHelper.save(contemporaryDancer);
 
-        hipHopDancer = new Dancer("Stoo", "Stooby Doo", 9, "Hip Hop");
+        hipHopDancer = new Dancer("Stoo", "Stooby Doo", 9, "Hip Hop", choreographer2);
         DBHelper.save(hipHopDancer);
 
         hipHopDancer.setShoeSize(9);
@@ -50,12 +57,7 @@ public class Runner {
         List<Director> directorsFound = DBHelper.getAll(Director.class);
         Director directorFond = DBHelper.findById(Director.class, 2);
 
-//        CRUD FOR CHOREOGRAPHER
-        choreographer1 = new Choreographer("Malvin", "Famous Strike");
-        choreographer2 = new Choreographer("Jasmin", "Great Dances");
 
-        DBHelper.save(choreographer1);
-        DBHelper.save(choreographer2);
 
 //        CRUD FOR DANCESHOW
 
@@ -82,5 +84,10 @@ public class Runner {
 
 //        TODO: Get dancer for physio
         PT getPTofDancer = DBDancer.getPTForDancer(ballerina);
+
+//        TODO: Get all dancers for choreographer and check dancer's choreographer
+        List<Dancer> dancersOfChoreographer = DBChoreographer.getDanceCrew(choreographer1);
+//        Choreographer choreoOfDancer = DBDancer.getChoreographerofDancer(ballerina);
+
     }
 }

@@ -1,5 +1,6 @@
 package db;
 
+import models.Choreographer;
 import models.Dancer;
 import models.PT;
 import org.hibernate.Criteria;
@@ -28,4 +29,20 @@ public class DBDancer {
     }
 
 
+    public static Choreographer getChoreographerofDancer(Dancer dancer){
+        session = HibernateUtil.getSessionFactory().openSession();
+        Choreographer results = null;
+        try {
+            Criteria cr = session.createCriteria(Choreographer.class);
+            cr.add(Restrictions.eq("dancer", dancer));
+            results = (Choreographer)cr.uniqueResult();
+        } catch (HibernateException ex){
+            ex.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return results;
+        }
+
 }
+

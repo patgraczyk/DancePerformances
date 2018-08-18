@@ -1,6 +1,8 @@
 package models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "choreographers")
@@ -10,10 +12,12 @@ public class Choreographer {
     private int id;
     private String nameChoreographer;
     private String choreography;
+    private List<Dancer> dancersChoreographed;
 
     public Choreographer(String nameChoreographer, String choreography) {
         this.nameChoreographer = nameChoreographer;
         this.choreography = choreography;
+        this.dancersChoreographed =new ArrayList<Dancer>();
     }
 
     public Choreographer() {
@@ -48,5 +52,15 @@ public class Choreographer {
 
     public void setChoreography(String choreography) {
         this.choreography = choreography;
+    }
+
+
+    @OneToMany(mappedBy = "choreographer", fetch = FetchType.LAZY)
+    public List<Dancer> getDancersChoreographed() {
+        return dancersChoreographed;
+    }
+
+    public void setDancersChoreographed(List<Dancer> dancersChoreographed) {
+        this.dancersChoreographed = dancersChoreographed;
     }
 }

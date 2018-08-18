@@ -15,13 +15,15 @@ public class Dancer {
     private int shoeSize;
     private String danceStyle;
     private PT pt;
+    private Choreographer choreographer;
 
-    public Dancer(String name, String stageName, int shoeSize, String danceStyle) {
+    public Dancer(String name, String stageName, int shoeSize, String danceStyle, Choreographer choreographer) {
         this.name = name;
         this.stageName = stageName;
         this.shoeSize = shoeSize;
         this.danceStyle = danceStyle;
         this.pt = pt;
+        this.choreographer = choreographer;
     }
 
     public Dancer() {
@@ -82,5 +84,15 @@ public class Dancer {
 
     public void setPt(PT pt) {
         this.pt = pt;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "choreographer_id", nullable = false)
+    public Choreographer getChoreographer() {
+        return choreographer;
+    }
+
+    public void setChoreographer(Choreographer choreographer) {
+        this.choreographer = choreographer;
     }
 }
