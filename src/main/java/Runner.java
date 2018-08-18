@@ -1,6 +1,4 @@
-import db.DBChoreographer;
-import db.DBDancer;
-import db.DBHelper;
+import db.*;
 import models.*;
 import models.Dancer;
 
@@ -59,10 +57,10 @@ public class Runner {
 
 
 
-//        CRUD FOR DANCESHOW
+//      CRUD FOR DANCESHOW
 
-        danceShow1 = new DanceShow("Swan Lake");
-        danceShow2 = new DanceShow("Highland Fling");
+        danceShow1 = new DanceShow("Swan Lake", director1);
+        danceShow2 = new DanceShow("Highland Fling", director1);
 
         DBHelper.save(danceShow1);
         DBHelper.save(danceShow2);
@@ -87,7 +85,13 @@ public class Runner {
 
 //        TODO: Get all dancers for choreographer and check dancer's choreographer
         List<Dancer> dancersOfChoreographer = DBChoreographer.getDanceCrew(choreographer1);
-//        Choreographer choreoOfDancer = DBDancer.getChoreographerofDancer(ballerina);
+//        Choreographer choreographer = DBDancer.getChoreographerofDancer(ballerina);
+
+//        TODO: Get all shows of director, check the director of the danceshow
+
+        List<DanceShow> danceShowOfDirector = DBDirector.getDanceShowsOfDirector(director1);
+        List<DanceShow> danceShowOfDirector2 = DBDirector.getDanceShowsOfDirector(director2);
+//        Director director = DBDanceShow.getDirectorOfShow(danceShow1);
 
     }
 }

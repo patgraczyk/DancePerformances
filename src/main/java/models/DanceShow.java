@@ -3,17 +3,19 @@ package models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "dance_shows")
+@Table(name = "danceshows")
 
 public class DanceShow {
 
     private int id;
     private String title;
+    private Director director;
 //    ADD VENUE
 
 
-    public DanceShow(String title) {
+    public DanceShow(String title, Director director) {
         this.title = title;
+        this.director = director;
     }
 
     public DanceShow() {
@@ -37,5 +39,15 @@ public class DanceShow {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "director_id", nullable =false)
+    public Director getDirector() {
+        return director;
+    }
+
+    public void setDirector(Director director) {
+        this.director = director;
     }
 }
