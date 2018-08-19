@@ -16,13 +16,15 @@ public class DanceShow {
     private String title;
     private Director director;
     private List<Dancer> dancers;
+    private int budget;
 //    ADD VENUE
 
 
-    public DanceShow(String title, Director director) {
+    public DanceShow(String title, int budget, Director director) {
         this.title = title;
         this.director = director;
         this.dancers = new ArrayList<Dancer>();
+        this.budget = budget;
     }
 
     public DanceShow() {
@@ -58,6 +60,16 @@ public class DanceShow {
         this.director = director;
     }
 
+
+    @Column(name = "budget")
+    public int getBudget() {
+        return budget;
+    }
+
+    public void setBudget(int budget) {
+        this.budget = budget;
+    }
+
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @ManyToMany
     @JoinTable(
@@ -76,4 +88,17 @@ public class DanceShow {
     public void addDancers (Dancer dancer){
         this.dancers.add(dancer);
     }
+
+
+    public boolean payDancer(Dancer dancer, int payment){
+        if (payment <= budget){
+            budget -= payment;
+            dancer.addToSalary(payment);
+            return true;
+        }
+        return false;
+
+    }
+
+
 }

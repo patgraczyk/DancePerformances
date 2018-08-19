@@ -1,9 +1,6 @@
 import db.*;
 import models.*;
-import models.Dancers.BalletDancer;
-import models.Dancers.ContemporaryDancer;
-import models.Dancers.Dancer;
-import models.Dancers.HipHopDancer;
+import models.Dancers.*;
 
 import java.util.List;
 
@@ -23,6 +20,7 @@ public class Runner {
         Venue venue2;
         PT physio1;
         PT physio2;
+        PrimaBallerina primaBallerina;
 
 //        CRUD FOR CHOREOGRAPHER
         choreographer1 = new Choreographer("Malvin", "Famous Strike");
@@ -32,17 +30,20 @@ public class Runner {
         DBHelper.save(choreographer2);
 
 ////        CRUD FOR DANCER
-        ballerina = new BalletDancer("Ana", "Ballerina", 5, "ballet", choreographer1);
+        ballerina = new BalletDancer("Ana", "Ballerina", 5, DanceType.BALLET, 120, choreographer1);
         DBHelper.save(ballerina);
 
-        contemporaryDancer = new ContemporaryDancer("Digory", "Moomin", 8, "contemporary", choreographer1);
+        contemporaryDancer = new ContemporaryDancer("Digory", "Moomin", 8, DanceType.COMMERCIAL, 430, choreographer1);
         DBHelper.save(contemporaryDancer);
 
-        hipHopDancer = new HipHopDancer("Stoo", "Stooby Doo", 9, "Hip Hop", choreographer2);
+        hipHopDancer = new HipHopDancer("Stoo", "Stooby Doo", 9, DanceType.HIPHOP, 500, choreographer2);
         DBHelper.save(hipHopDancer);
 
         hipHopDancer.setShoeSize(9);
         DBHelper.update(hipHopDancer);
+
+        primaBallerina = new PrimaBallerina("Josefina", "Alba", 4, DanceType.BALLET, 4500, choreographer1, "soloist");
+        DBHelper.save(primaBallerina);
 
         List<Dancer> dancersFound =  DBHelper.getAll(Dancer.class);
         Dancer dancerFound = DBHelper.findById(Dancer.class, 1);
@@ -62,8 +63,8 @@ public class Runner {
 //
 ////    CRUD FOR DANCESHOW
 //
-        danceShow1 = new DanceShow("Swan Lake", director1);
-        danceShow2 = new DanceShow("Highland Fling", director1);
+        danceShow1 = new DanceShow("Swan Lake", 400, director1);
+        danceShow2 = new DanceShow("Highland Fling",1000, director1);
 
         DBHelper.save(danceShow1);
         DBHelper.save(danceShow2);

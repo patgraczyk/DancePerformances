@@ -12,6 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "dancers")
 @Inheritance(strategy = InheritanceType.JOINED)
+
 public abstract class Dancer {
 
     private int id;
@@ -22,15 +23,18 @@ public abstract class Dancer {
     private PT pt;
     private Choreographer choreographer;
     private List<DanceShow> danceShows;
+    private int salary;
+    private DanceType danceType;
 
-    public Dancer(String name, String stageName, int shoeSize, String danceStyle, Choreographer choreographer) {
+    public Dancer(String name, String stageName, int shoeSize, DanceType danceType, int salary, Choreographer choreographer) {
         this.name = name;
         this.stageName = stageName;
         this.shoeSize = shoeSize;
-        this.danceStyle = danceStyle;
+        this.danceType = danceType;
         this.pt = pt;
         this.choreographer = choreographer;
         this.danceShows = new ArrayList<DanceShow>();
+        this.salary = salary;
     }
 
     public Dancer() {
@@ -75,13 +79,13 @@ public abstract class Dancer {
         this.shoeSize = shoeSize;
     }
 
-    @Column(name = "dance_style")
-    public String getDanceStyle() {
-        return danceStyle;
+    @Enumerated(value = EnumType.STRING)
+    public DanceType getDanceType() {
+        return danceType;
     }
 
-    public void setDanceStyle(String danceStyle) {
-        this.danceStyle = danceStyle;
+    public void setDanceType(DanceType danceType) {
+        this.danceType = danceType;
     }
 
     @OneToOne(mappedBy = "dancer", fetch = FetchType.LAZY)
@@ -91,6 +95,15 @@ public abstract class Dancer {
 
     public void setPt(PT pt) {
         this.pt = pt;
+    }
+
+    @Column(name = "salary")
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
     }
 
     @ManyToOne
@@ -120,5 +133,9 @@ public abstract class Dancer {
 
     public void addDanceShow(DanceShow danceShow){
         this.danceShows.add(danceShow);
+    }
+
+    public void addToSalary(int payment){
+        salary += payment;
     }
 }

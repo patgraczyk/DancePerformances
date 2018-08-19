@@ -20,5 +20,8 @@
         <mapping class = "models.Dancers.BalletDancer"/>
         <mapping class = "models.Dancers.HipHopDancer"/>
         <mapping class = "models.Dancers.ContemporaryDancer"/>
+        <mapping class = "models.Dancers.PrimaBallerina"/>
+
+
     </session-factory>
 </hibernate-configuration>
